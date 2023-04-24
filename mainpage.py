@@ -62,6 +62,26 @@ def post_content(id):
 	return render_template("post-content.html", article=article)
 
 
+@mainpage.route("/posts/<int:id>/edit", methods=["POST", "GET"])
+def post_edit(id):
+	if request.method == "POST":
+		title = request.form["title"]
+		intro = request.form["intro"]
+		text = request.form["text"]
+
+		article = Article(title=title, intro=intro, text=text)
+
+		try:
+			db.session.add(article)
+			db.session.commit()
+			return redirect("/")
+
+		except:
+			return "Error."
+	else:
+		article = Article.query.get(id)
+		return render_template("post-edit.html", article=article)
+
 @mainpage.route("/posts/<int:id>/del")
 def post_del(id):
 	article = Article.query.get_or_404(id)
