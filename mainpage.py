@@ -42,7 +42,7 @@ def create_article():
 		try:
 			db.session.add(article)
 			db.session.commit()
-			return redirect("/")
+			return redirect("/posts")
 
 		except:
 			return "Error."
@@ -64,23 +64,23 @@ def post_content(id):
 
 @mainpage.route("/posts/<int:id>/edit", methods=["POST", "GET"])
 def post_edit(id):
-	if request.method == "POST":
-		title = request.form["title"]
-		intro = request.form["intro"]
-		text = request.form["text"]
+	article = Article.query.get(id)
 
-		article = Article(title=title, intro=intro, text=text)
+	if request.method == "POST":
+		article.title = request.form["title"]
+		article.intro = request.form["intro"]
+		article.text = request.form["text"]
 
 		try:
-			db.session.add(article)
 			db.session.commit()
-			return redirect("/")
+			return redirect("/posts")
 
 		except:
 			return "Error."
 	else:
 		article = Article.query.get(id)
 		return render_template("post-edit.html", article=article)
+
 
 @mainpage.route("/posts/<int:id>/del")
 def post_del(id):

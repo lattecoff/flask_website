@@ -9,7 +9,7 @@ Edit article
 	<h1 class="container">Edit article</h1>
 </div>
 <form action="" method="post">
-	<input type="text" name="title" id="title" class="container form-control" placeholder="Enter title">{{ article.tile }}<br>
+	<input type="text" name="title" id="title" class="container form-control" placeholder="Enter title" value="{{ article.title }}"><br>
 	<textarea name="intro" id="intro" class="container form-control" placeholder="Enter intro" cols="30" rows="10">{{ article.intro }}</textarea><br>
 	<textarea name="text" id="text" class="container form-control" placeholder="Enter base text" cols="30" rows="10">{{ article.text }}</textarea>
 	<input type="submit" value="Commit" class="btn btn-success">
