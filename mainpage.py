@@ -29,7 +29,7 @@ def index():
 def about():
 	return render_template("about.html")
 
-@mainpage.route("/create-article.html", methods=["POST", "GET"])
+@mainpage.route("/create-article", methods=["POST", "GET"])
 #@mainpage.route("/create-article.html")
 def create_article():
 	if request.method == "POST":
@@ -48,6 +48,18 @@ def create_article():
 			return "Error."
 	else:
 		return render_template("create-article.html")
+
+
+@mainpage.route("/posts")
+def posts():
+	articles = Article.query.order_by(Article.date.desc()).all()
+	return render_template("posts.html", articles=articles)
+
+
+@mainpage.route("/posts/<int:id>")
+def post_content(id):
+	article = Article.query.get(id)
+	return render_template("post-content.html", article=article)
 
 
 @mainpage.route("/user/<string:name>/<int:id>")
