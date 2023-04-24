@@ -62,6 +62,18 @@ def post_content(id):
 	return render_template("post-content.html", article=article)
 
 
+@mainpage.route("/posts/<int:id>/del")
+def post_del(id):
+	article = Article.query.get_or_404(id)
+
+	try:
+		db.session.delete(article)
+		db.session.commit()
+		return redirect("/")
+	except:
+		return "Error."
+
+
 @mainpage.route("/user/<string:name>/<int:id>")
 def user(name, id):
 	return "User: " + name + "-" + str(id)

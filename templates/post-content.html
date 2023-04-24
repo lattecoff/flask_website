@@ -9,10 +9,12 @@
 	<h1>{{ article.title }}</h1>
 	
 	<div class="alert alert-info">
-		<p>{{ article.date.date() }}</p>
+		<p>{{ article.date.date() }}</p> 
 		<p>{{ article.intro }}</p>
 		<p>{{ article.text }}</p>
 		<button class="btn btn-warning"><a href="/posts">Show articles</a></button>
+		<button class="btn btn-warning"><a href="/posts/{{ article.id }}/edit">Edit</a></button>
+		<button class="btn btn-warning"><a href="/posts/{{ article.id }}/del">Delete</a></button>
 	</div>
 
 </div>
